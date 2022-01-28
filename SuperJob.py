@@ -43,7 +43,9 @@ def get_vacancies_for_superjob(sj_url, sj_token, languages):
                 payment_from = vacancy['payment_from']
                 payment_to = vacancy['payment_to']
                 predict_salary = predict_rub_salary_for_superjob(payment_from, payment_to)
-                if predict_salary != None:
+                if predict_salary:
+                    pass
+                else:
                     salaries.append(predict_salary)
 
         vacancies_found = response.json()['total']
