@@ -35,7 +35,9 @@ def get_vacancies_for_superjob(sj_url, sj_token, languages):
 
         response = requests.get(sj_url, params=params, headers=headers)
         response.raise_for_status()
-        for vacancy in response.json()['objects']:
+        objects = response.json()['objects']
+
+        for vacancy in objects:
             if vacancy['currency'] == "rub":
 
                 payment_from = vacancy['payment_from']
@@ -44,8 +46,9 @@ def get_vacancies_for_superjob(sj_url, sj_token, languages):
                 if predict_salary != None:
                     salaries.append(predict_salary)
 
+        vacancies_found = response.json()['total']
         vacancies[language] = {
-            "vacancies_found": response.json()['total'],
+            "vacancies_found": vacancies_found,
             "vacancies_processed": len(salaries),
             "average_salary": int(mean(salaries))
         }

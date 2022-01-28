@@ -28,8 +28,9 @@ def get_vacancies_for_headhunter(hh_url, languages):
 
         response = requests.get(hh_url, params)
         salaries = []
+        items = response.json()['items']
 
-        for item in response.json()['items']:
+        for item in items:
             salary = item['salary']
 
             if salary and salary['currency'] == "RUR":
@@ -40,8 +41,9 @@ def get_vacancies_for_headhunter(hh_url, languages):
             else:
                 print(None)
 
+        vacancies_found = response.json()['found']
         vacancies[language] = {
-            "vacancies_found": response.json()['found'],
+            "vacancies_found": vacancies_found,
             "vacancies_processed": len(salaries),
             "average_salary": int(mean(salaries))
         }
