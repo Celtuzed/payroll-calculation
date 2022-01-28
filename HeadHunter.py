@@ -2,7 +2,7 @@ import requests
 from statistics import mean
 
 
-def predict_rub_salary_for_HeadHunter(salary):
+def predict_rub_salary_for_headhunter(salary):
 
     if salary['from'] and not salary['to']:
         salary_from_the_vacancy = salary['from']*1.2
@@ -14,7 +14,7 @@ def predict_rub_salary_for_HeadHunter(salary):
     return salary_from_the_vacancy
 
 
-def get_vacancies_for_HeadHunter(hh_url, languages):
+def get_vacancies_for_headhunter(hh_url, languages):
 
     vacancies = {}
 
@@ -33,7 +33,7 @@ def get_vacancies_for_HeadHunter(hh_url, languages):
             salary = item['salary']
 
             if salary and salary['currency'] == "RUR":
-                predict_salary = predict_rub_salary_for_HeadHunter(salary)
+                predict_salary = predict_rub_salary_for_headhunter(salary)
                 salaries.append(predict_salary)
             else:
                 print(None)

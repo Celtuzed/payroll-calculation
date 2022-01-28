@@ -3,8 +3,8 @@ import os
 from dotenv import load_dotenv
 from terminaltables import SingleTable
 
-from SuperJob import get_vacancies_for_SuperJob
-from HeadHunter import get_vacancies_for_HeadHunter
+from superjob import get_vacancies_for_superjob
+from headhunter import get_vacancies_for_headhunter
 
 
 def get_sj_table(sj_vacancies, languages):
@@ -79,8 +79,8 @@ if __name__ == '__main__':
     sj_url = "https://api.superjob.ru/2.0/vacancies/"
     hh_url = "https://api.hh.ru/vacancies"
 
-    hh_vacancies = get_vacancies_for_HeadHunter(hh_url, languages)
-    sj_vacancies = get_vacancies_for_SuperJob(sj_url, sj_token, languages)
+    hh_vacancies = get_vacancies_for_headhunter(hh_url, languages)
+    sj_vacancies = get_vacancies_for_superjob(sj_url, sj_token, languages)
     sj_table = get_sj_table(sj_vacancies, languages)
     hh_table = get_hh_table(hh_vacancies, languages)
 

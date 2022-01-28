@@ -2,7 +2,7 @@ import requests
 from statistics import mean
 
 
-def predict_rub_salary_for_SuperJob(vacancy):
+def predict_rub_salary_for_superjob(vacancy):
 
     if vacancy['payment_from'] and not vacancy['payment_to']:
         salary_from_the_vacancy = vacancy['payment_from']*1.2
@@ -16,7 +16,7 @@ def predict_rub_salary_for_SuperJob(vacancy):
     return salary_from_the_vacancy
 
 
-def get_vacancies_for_SuperJob(sj_url, sj_token, languages):
+def get_vacancies_for_superjob(sj_url, sj_token, languages):
 
     vacancies = {}
 
@@ -37,7 +37,7 @@ def get_vacancies_for_SuperJob(sj_url, sj_token, languages):
         response.raise_for_status()
         for vacancy in response.json()['objects']:
             if vacancy['currency'] == "rub":
-                predict_salary = predict_rub_salary_for_SuperJob(vacancy)
+                predict_salary = predict_rub_salary_for_superjob(vacancy)
                 if predict_salary != None:
                     salaries.append(predict_salary)
 
