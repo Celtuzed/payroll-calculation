@@ -28,7 +28,7 @@ def get_vacancies_for_superjob(sj_url, sj_token, languages):
 
         params = {
             "keyword": f"Программист {language}",
-            "town": 4,
+            "town": 4, #id Москвы у SuperJob API
             "count": 100
         }
         salaries = []

@@ -22,7 +22,7 @@ def get_vacancies_for_headhunter(hh_url, languages):
 
         params = {
             "text": f"Программист {language}",
-            "area": "1",
+            "area": "1", #id Москвы у HeadHunter API
             "per_page": "100"
             }
 
