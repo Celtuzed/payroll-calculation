@@ -38,8 +38,6 @@ def get_vacancies_for_headhunter(hh_url, languages):
                 payment_to = salary['to']
                 predict_salary = predict_rub_salary_for_headhunter(payment_from, payment_to)
                 salaries.append(predict_salary)
-            else:
-                print(None)
 
         vacancies_found = response.json()['found']
         vacancies[language] = {
