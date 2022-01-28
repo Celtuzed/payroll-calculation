@@ -8,8 +8,8 @@ def predict_rub_salary_for_headhunter(payment_from, payment_to):
         salary_from_the_vacancy = payment_from*1.2
     elif payment_to and not payment_from:
         salary_from_the_vacancy = payment_to*0.8
-    else:
-        salary_from_the_vacancy = payment_from
+    elif payment_to and payment_from:
+        salary_from_the_vacancy = (payment_from + payment_to)/2
 
     return salary_from_the_vacancy
 

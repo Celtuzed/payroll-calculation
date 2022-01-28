@@ -8,10 +8,10 @@ def predict_rub_salary_for_superjob(payment_from, payment_to):
         salary_from_the_vacancy = payment_from*1.2
     elif payment_to and not payment_from:
         salary_from_the_vacancy = payment_to*0.8
+    elif payment_from and payment_to:
+        salary_from_the_vacancy = (payment_from + payment_to)/2
     elif not payment_from and not payment_to:
         salary_from_the_vacancy = None
-    else:
-        salary_from_the_vacancy = payment_from
 
     return salary_from_the_vacancy
 
