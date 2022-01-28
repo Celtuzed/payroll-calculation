@@ -31,7 +31,7 @@ def get_sj_table(sj_vacancies, languages):
         )
 
     sj_table = SingleTable(sj_table_data, sj_title)
-    return(sj_table.table)
+    return sj_table.table
 
 
 def get_hh_table(hh_vacancies, languages):
@@ -57,7 +57,7 @@ def get_hh_table(hh_vacancies, languages):
         )
 
     hh_table = SingleTable(hh_table_data, hh_title)
-    return(hh_table.table)
+    return hh_table.table
 
 
 if __name__ == '__main__':

@@ -46,4 +46,4 @@ def get_vacancies_for_headhunter(hh_url, languages):
             "average_salary": int(mean(salaries))
         }
 
-    return(vacancies)
+    return vacancies

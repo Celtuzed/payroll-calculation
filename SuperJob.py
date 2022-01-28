@@ -53,4 +53,4 @@ def get_vacancies_for_superjob(sj_url, sj_token, languages):
             "average_salary": int(mean(salaries))
         }
 
-    return(vacancies)
+    return vacancies
