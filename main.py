@@ -81,8 +81,8 @@ if __name__ == '__main__':
 
     hh_vacancies = get_vacancies_for_headhunter(hh_url, languages)
     sj_vacancies = get_vacancies_for_superjob(sj_url, sj_token, languages)
-    sj_table = get_sj_table(sj_vacancies, languages)
     hh_table = get_hh_table(hh_vacancies, languages)
+    sj_table = get_sj_table(sj_vacancies, languages)
 
     print(sj_table)
     print(hh_table)

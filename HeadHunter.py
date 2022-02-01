@@ -14,6 +14,17 @@ def predict_rub_salary_for_headhunter(payment_from, payment_to):
     return salary_from_the_vacancy
 
 
+def get_hh_salary(item, salaries):
+
+    salary = item['salary']
+
+    if salary and salary['currency'] == "RUR":
+        payment_from = salary['from']
+        payment_to = salary['to']
+        predict_salary = predict_rub_salary_for_headhunter(payment_from, payment_to)
+        return predict_salary
+
+
 def get_vacancies_for_headhunter(hh_url, languages):
 
     vacancies = {}
@@ -31,12 +42,8 @@ def get_vacancies_for_headhunter(hh_url, languages):
         items = response.json()['items']
 
         for item in items:
-            salary = item['salary']
-
-            if salary and salary['currency'] == "RUR":
-                payment_from = salary['from']
-                payment_to = salary['to']
-                predict_salary = predict_rub_salary_for_headhunter(payment_from, payment_to)
+            predict_salary = get_hh_salary(item, salaries)
+            if predict_salary:
                 salaries.append(predict_salary)
 
         vacancies_found = response.json()['found']
