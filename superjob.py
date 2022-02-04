@@ -1,19 +1,8 @@
 import requests
 from statistics import mean
 
+from predict_salary import predict_rub_salary
 
-def predict_rub_salary_for_superjob(payment_from, payment_to):
-
-    if payment_from and not payment_to:
-        salary_from_the_vacancy = payment_from*1.2
-    elif payment_to and not payment_from:
-        salary_from_the_vacancy = payment_to*0.8
-    elif payment_from and payment_to:
-        salary_from_the_vacancy = (payment_from + payment_to)/2
-    elif not payment_from and not payment_to:
-        salary_from_the_vacancy = None
-
-    return salary_from_the_vacancy
 
 def get_sj_salary(vacancy, salaries):
 
@@ -21,12 +10,14 @@ def get_sj_salary(vacancy, salaries):
 
         payment_from = vacancy['payment_from']
         payment_to = vacancy['payment_to']
-        predict_salary = predict_rub_salary_for_superjob(payment_from, payment_to)
+        predict_salary = predict_rub_salary(payment_from, payment_to)
         if predict_salary:
             return predict_salary
 
 
-def get_vacancies_for_superjob(sj_url, sj_token, languages):
+def get_vacancies_for_superjob(sj_token, languages):
+
+    sj_url = "https://api.superjob.ru/2.0/vacancies/"
 
     vacancies = {}
 

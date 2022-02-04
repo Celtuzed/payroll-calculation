@@ -76,11 +76,9 @@ if __name__ == '__main__':
     ]
 
     sj_token = os.getenv('SJ_TOKEN')
-    sj_url = "https://api.superjob.ru/2.0/vacancies/"
-    hh_url = "https://api.hh.ru/vacancies"
 
-    hh_vacancies = get_vacancies_for_headhunter(hh_url, languages)
-    sj_vacancies = get_vacancies_for_superjob(sj_url, sj_token, languages)
+    hh_vacancies = get_vacancies_for_headhunter(languages)
+    sj_vacancies = get_vacancies_for_superjob(sj_token, languages)
     hh_table = get_hh_table(hh_vacancies, languages)
     sj_table = get_sj_table(sj_vacancies, languages)
 
