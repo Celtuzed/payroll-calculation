@@ -11,8 +11,8 @@ def get_sj_salary(vacancy, salaries):
         payment_from = vacancy['payment_from']
         payment_to = vacancy['payment_to']
         predict_salary = predict_rub_salary(payment_from, payment_to)
-        if predict_salary:
-            return predict_salary
+
+        return predict_salary
 
 
 def get_vacancies_for_superjob(sj_token, languages):
@@ -39,9 +39,9 @@ def get_vacancies_for_superjob(sj_token, languages):
         objects = response.json()['objects']
 
         for vacancy in objects:
-            predict_salary = get_sj_salary(vacancy, salaries)
-            if predict_salary:
-                salaries.append(predict_salary)
+            salary = get_sj_salary(vacancy, salaries)
+            if salary:
+                salaries.append(salary)
 
         vacancies_found = response.json()['total']
         vacancies[language] = {

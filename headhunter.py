@@ -34,9 +34,9 @@ def get_vacancies_for_headhunter(languages):
         items = response.json()['items']
 
         for item in items:
-            predict_salary = get_hh_salary(item, salaries)
-            if predict_salary:
-                salaries.append(predict_salary)
+            salary = get_hh_salary(item, salaries)
+            if salary:
+                salaries.append(salary)
 
         vacancies_found = response.json()['found']
         vacancies[language] = {
