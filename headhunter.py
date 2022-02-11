@@ -11,8 +11,8 @@ def get_hh_salary(item, salaries):
     if salary and salary['currency'] == "RUR":
         payment_from = salary['from']
         payment_to = salary['to']
-        predict_salary = predict_rub_salary(payment_from, payment_to)
-        return predict_salary
+        salary = predict_rub_salary(payment_from, payment_to)
+        return salary
 
 
 def get_vacancies_for_headhunter(languages):

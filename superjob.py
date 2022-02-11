@@ -10,9 +10,9 @@ def get_sj_salary(vacancy, salaries):
 
         payment_from = vacancy['payment_from']
         payment_to = vacancy['payment_to']
-        predict_salary = predict_rub_salary(payment_from, payment_to)
+        salary = predict_rub_salary(payment_from, payment_to)
 
-        return predict_salary
+        return salary
 
 
 def get_vacancies_for_superjob(sj_token, languages):
