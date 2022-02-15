@@ -36,14 +36,15 @@ def get_vacancies_for_superjob(sj_token, languages):
 
         response = requests.get(sj_url, params=params, headers=headers)
         response.raise_for_status()
-        objects = response.json()['objects']
+        response_json = response.json()
+        objects = response_json['objects']
 
         for vacancy in objects:
             salary = get_sj_salary(vacancy, salaries)
             if salary:
                 salaries.append(salary)
 
-        vacancies_found = response.json()['total']
+        vacancies_found = response_json['total']
         vacancies[language] = {
             "vacancies_found": vacancies_found,
             "vacancies_processed": len(salaries),

@@ -31,14 +31,15 @@ def get_vacancies_for_headhunter(languages):
 
         response = requests.get(hh_url, params)
         salaries = []
-        items = response.json()['items']
+        response_json = response.json()
+        items = response_json['items']
 
         for item in items:
             salary = get_hh_salary(item, salaries)
             if salary:
                 salaries.append(salary)
 
-        vacancies_found = response.json()['found']
+        vacancies_found = response_json['found']
         vacancies[language] = {
             "vacancies_found": vacancies_found,
             "vacancies_processed": len(salaries),
