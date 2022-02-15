@@ -10,7 +10,7 @@ from headhunter import get_vacancies_for_headhunter
 def get_tables(sj_vacancies, hh_vacancies, languages):
 
     hh_title = "HeadHunter Moscow"
-    sj_title = "rSuperJob Moscow"
+    sj_title = "SuperJob Moscow"
 
     sj_table_data = [
         (
@@ -20,7 +20,7 @@ def get_tables(sj_vacancies, hh_vacancies, languages):
             'Средняя зарплата'
         )
     ]
-    
+
     hh_table_data = [
         (
             'Язык программирования',
