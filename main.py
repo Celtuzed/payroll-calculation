@@ -7,7 +7,10 @@ from superjob import get_vacancies_for_superjob
 from headhunter import get_vacancies_for_headhunter
 
 
-def get_sj_table(sj_vacancies, languages):
+def get_tables(sj_vacancies, hh_vacancies, languages):
+
+    hh_title = "HeadHunter Moscow"
+    sj_title = "rSuperJob Moscow"
 
     sj_table_data = [
         (
@@ -17,10 +20,18 @@ def get_sj_table(sj_vacancies, languages):
             'Средняя зарплата'
         )
     ]
-
-    sj_title = "SuperJob Moscow"
+    
+    hh_table_data = [
+        (
+            'Язык программирования',
+            'Вакансий найдено',
+            'Вакансий обработано',
+            'Средняя зарплата'
+        )
+    ]
 
     for language in languages:
+
         sj_table_data.append(
             (
                 language,
@@ -30,23 +41,6 @@ def get_sj_table(sj_vacancies, languages):
             )
         )
 
-    sj_table = SingleTable(sj_table_data, sj_title)
-    return sj_table.table
-
-
-def get_hh_table(hh_vacancies, languages):
-
-    hh_table_data = [
-        (
-            'Язык программирования',
-            'Вакансий найдено',
-            'Вакансий обработано',
-            'Средняя зарплата'
-        )
-    ]
-    hh_title = "HeadHunter Moscow"
-
-    for language in languages:
         hh_table_data.append(
             (
                 language,
@@ -56,8 +50,10 @@ def get_hh_table(hh_vacancies, languages):
             )
         )
 
+    sj_table = SingleTable(sj_table_data, sj_title)
     hh_table = SingleTable(hh_table_data, hh_title)
-    return hh_table.table
+
+    return sj_table.table, hh_table.table
 
 
 if __name__ == '__main__':
@@ -79,8 +75,7 @@ if __name__ == '__main__':
 
     hh_vacancies = get_vacancies_for_headhunter(languages)
     sj_vacancies = get_vacancies_for_superjob(sj_token, languages)
-    hh_table = get_hh_table(hh_vacancies, languages)
-    sj_table = get_sj_table(sj_vacancies, languages)
+    sj_table, hh_table = get_tables(sj_vacancies, hh_vacancies, languages)
 
     print(sj_table)
     print(hh_table)
