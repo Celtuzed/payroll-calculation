@@ -14,6 +14,27 @@ def get_hh_salary(item, salaries):
         salary = predict_rub_salary(payment_from, payment_to)
         return salary
 
+def get_vacancies_for_one_language(language, hh_url):
+
+    params = {
+        "text": f"Программист {language}",
+        "area": 1, #id Москвы у HeadHunter API
+        "per_page": "100"
+        }
+
+    response = requests.get(hh_url, params)
+    salaries = []
+    response_json = response.json()
+    items = response_json['items']
+
+    for item in items:
+        salary = get_hh_salary(item, salaries)
+        if salary:
+            salaries.append(salary)
+
+    vacancies_found = response_json['found']
+
+    return vacancies_found, salaries
 
 def get_vacancies_for_headhunter(languages):
 
@@ -23,23 +44,13 @@ def get_vacancies_for_headhunter(languages):
 
     for language in languages:
 
-        params = {
-            "text": f"Программист {language}",
-            "area": "1", #id Москвы у HeadHunter API
-            "per_page": "100"
-            }
-
-        response = requests.get(hh_url, params)
-        salaries = []
-        response_json = response.json()
-        items = response_json['items']
+        vacancies_found, salaries = get_vacancies_for_one_language(language, hh_url)
 
         for item in items:
             salary = get_hh_salary(item, salaries)
             if salary:
                 salaries.append(salary)
 
-        vacancies_found = response_json['found']
         vacancies[language] = {
             "vacancies_found": vacancies_found,
             "vacancies_processed": len(salaries),

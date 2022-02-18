@@ -15,6 +15,30 @@ def get_sj_salary(vacancy, salaries):
         return salary
 
 
+def get_vacancies_for_one_language(language, sj_url, headers):
+
+    params = {
+        "keyword": f"Программист {language}",
+        "town": 4, #id Москвы у SuperJob API
+        "count": 100
+    }
+    salaries = []
+
+    response = requests.get(sj_url, params=params, headers=headers)
+    response.raise_for_status()
+    response_json = response.json()
+    objects = response_json['objects']
+
+    for vacancy in objects:
+        salary = get_sj_salary(vacancy, salaries)
+        if salary:
+            salaries.append(salary)
+
+    vacancies_found = response_json['total']
+
+    return vacancies_found, salaries
+
+
 def get_vacancies_for_superjob(sj_token, languages):
 
     sj_url = "https://api.superjob.ru/2.0/vacancies/"
@@ -27,24 +51,13 @@ def get_vacancies_for_superjob(sj_token, languages):
 
     for language in languages:
 
-        params = {
-            "keyword": f"Программист {language}",
-            "town": 4, #id Москвы у SuperJob API
-            "count": 100
-        }
-        salaries = []
-
-        response = requests.get(sj_url, params=params, headers=headers)
-        response.raise_for_status()
-        response_json = response.json()
-        objects = response_json['objects']
+        vacancies_found, salaries = get_vacancies_for_one_language(language, sj_url, headers)
 
         for vacancy in objects:
             salary = get_sj_salary(vacancy, salaries)
             if salary:
                 salaries.append(salary)
 
-        vacancies_found = response_json['total']
         vacancies[language] = {
             "vacancies_found": vacancies_found,
             "vacancies_processed": len(salaries),
