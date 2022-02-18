@@ -53,15 +53,15 @@ def get_vacancies_for_superjob(sj_token, languages):
 
         vacancies_found, salaries = get_vacancies_for_one_language(language, sj_url, headers)
 
-        for vacancy in objects:
-            salary = get_sj_salary(vacancy, salaries)
-            if salary:
-                salaries.append(salary)
+        if salaries:
+            average_salary = int(mean(salaries))
+        else:
+            average_salary = 0
 
         vacancies[language] = {
             "vacancies_found": vacancies_found,
             "vacancies_processed": len(salaries),
-            "average_salary": int(mean(salaries))
+            "average_salary": average_salary
         }
 
     return vacancies
