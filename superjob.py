@@ -15,11 +15,12 @@ def get_sj_salary(vacancy, salaries):
         return salary
 
 
-def get_vacancies_for_one_language(language, sj_url, headers):
+def get_vacancies_for_language(language, headers):
 
+    sj_url = "https://api.superjob.ru/2.0/vacancies/"
     params = {
         "keyword": f"Программист {language}",
-        "town": 4, #id Москвы у SuperJob API
+        "town": 4,  # id Москвы у SuperJob API
         "count": 100
     }
     salaries = []
@@ -41,8 +42,6 @@ def get_vacancies_for_one_language(language, sj_url, headers):
 
 def get_vacancies_for_superjob(sj_token, languages):
 
-    sj_url = "https://api.superjob.ru/2.0/vacancies/"
-
     vacancies = {}
 
     headers = {
@@ -51,7 +50,8 @@ def get_vacancies_for_superjob(sj_token, languages):
 
     for language in languages:
 
-        vacancies_found, salaries = get_vacancies_for_one_language(language, sj_url, headers)
+        vacancies_found, salaries = get_vacancies_for_language(
+            language, headers)
 
         if salaries:
             average_salary = int(mean(salaries))
