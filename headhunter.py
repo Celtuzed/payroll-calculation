@@ -26,15 +26,15 @@ def get_vacancies_for_language(language):
 
     response = requests.get(hh_url, params)
     salaries = []
-    response_json = response.json()
-    items = response_json['items']
+    vacancies_info = response.json()
+    items = vacancies_info['items']
 
     for item in items:
         salary = get_hh_salary(item, salaries)
         if salary:
             salaries.append(salary)
 
-    vacancies_found = response_json['found']
+    vacancies_found = vacancies_info['found']
 
     return vacancies_found, salaries
 
