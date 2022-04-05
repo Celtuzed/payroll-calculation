@@ -23,9 +23,9 @@ def get_table(vacancies, title, languages):
         table_data.append(
             (
                 language,
-                sj_vacancies[language]['vacancies_found'],
-                sj_vacancies[language]['vacancies_processed'],
-                sj_vacancies[language]['average_salary']
+                vacancies[language]['vacancies_found'],
+                vacancies[language]['vacancies_processed'],
+                vacancies[language]['average_salary']
             )
         )
 
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     ]
 
     sj_token = os.getenv('SJ_TOKEN')
-    
+
     sj_title = "SuperJob Moscow"
     hh_title = "HeadHunter Moscow"
 
