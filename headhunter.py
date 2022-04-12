@@ -23,16 +23,25 @@ def get_vacancies_for_language(language):
         "area": 1,  # id Москвы у HeadHunter API
         "per_page": "100"
         }
-
-    response = requests.get(hh_url, params)
     salaries = []
-    vacancies_info = response.json()
-    items = vacancies_info['items']
 
-    for item in items:
-        salary = get_hh_salary(item, salaries)
-        if salary:
-            salaries.append(salary)
+    page = 0
+    pages = 1
+
+
+    while page < pages:
+
+        response = requests.get(hh_url, params)
+        vacancies_info = response.json()
+        pages = vacancies_info["pages"]
+        page = page+1
+        params["page"] = page
+        items = vacancies_info['items']
+
+        for item in items:
+            salary = get_hh_salary(item, salaries)
+            if salary:
+                salaries.append(salary)
 
     vacancies_found = vacancies_info['found']
 

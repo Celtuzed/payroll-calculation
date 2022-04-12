@@ -25,15 +25,23 @@ def get_vacancies_for_language(language, headers):
     }
     salaries = []
 
-    response = requests.get(sj_url, params=params, headers=headers)
-    response.raise_for_status()
-    vacancies_info = response.json()
-    objects = vacancies_info['objects']
+    page = 0
+    pages = 1
 
-    for vacancy in objects:
-        salary = get_sj_salary(vacancy, salaries)
-        if salary:
-            salaries.append(salary)
+    while page < pages:
+
+        response = requests.get(sj_url, params=params, headers=headers)
+        vacancies_info = response.json()
+
+        pages = (vacancies_info["total"]//100)+1
+        page = page+1
+        params["page"] = page
+        objects = vacancies_info['objects']
+
+        for vacancy in objects:
+            salary = get_sj_salary(vacancy, salaries)
+            if salary:
+                salaries.append(salary)
 
     vacancies_found = vacancies_info['total']
 
