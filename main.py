@@ -7,7 +7,7 @@ from superjob import get_vacancies_for_superjob
 from headhunter import get_vacancies_for_headhunter
 
 
-def get_table(vacancies, title, languages):
+def print_table(vacancies, title, languages):
 
     table_data = [
         (
@@ -57,5 +57,5 @@ if __name__ == '__main__':
     hh_vacancies = get_vacancies_for_headhunter(languages)
     sj_vacancies = get_vacancies_for_superjob(sj_token, languages)
 
-    get_table(hh_vacancies, hh_title, languages)
-    get_table(sj_vacancies, sj_title, languages)
+    print_table(hh_vacancies, hh_title, languages)
+    print_table(sj_vacancies, sj_title, languages)
